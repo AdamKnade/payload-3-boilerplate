@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 
-const postgresPort = Number(process.env.E2E_POSTGRES_PORT ?? '54329')
+const postgresPort = Number(process.env.E2E_POSTGRES_PORT ?? '54343')
 const postgresDb = process.env.E2E_POSTGRES_DB ?? 'payload_e2e'
 const postgresUser = process.env.E2E_POSTGRES_USER ?? 'postgres'
 const postgresPassword = process.env.E2E_POSTGRES_PASSWORD ?? 'postgres'
