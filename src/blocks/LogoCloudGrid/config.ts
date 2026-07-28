@@ -4,7 +4,6 @@ import { logoCloudFields } from '@/blocks/shared/logoCloudFields'
 
 export const LogoCloudGrid: Block = {
   slug: 'logoCloudGrid',
-  dbName: 'pc_log_clo_gri',
   interfaceName: 'LogoCloudGridBlock',
   fields: [...logoCloudFields],
   labels: {
