@@ -184,7 +184,7 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | LogoCloudGridBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -708,6 +708,22 @@ export interface Form {
   createdAt: string;
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LogoCloudGridBlock".
+ */
+export interface LogoCloudGridBlock {
+  heading: string;
+  logos: {
+    logo: number | Media;
+    name: string;
+    href?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'logoCloudGrid';
+}
+/**
  * Comments submitted by visitors on blog posts
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -944,6 +960,7 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        logoCloudGrid?: T | LogoCloudGridBlockSelect<T>;
       };
   meta?:
     | T
@@ -1040,6 +1057,23 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LogoCloudGridBlock_select".
+ */
+export interface LogoCloudGridBlockSelect<T extends boolean = true> {
+  heading?: T;
+  logos?:
+    | T
+    | {
+        logo?: T;
+        name?: T;
+        href?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
