@@ -5,16 +5,16 @@ This file defines the working rules for automated agents in this repository.
 ## Core Principles
 
 - Prefer maintainable fixes over shortcuts.
-- Do not use broad or heavy dependency overrides as a primary solution.
+- Do not use dependency overrides as a vulnerability fix.
 - Keep the project on properly updated direct dependencies whenever possible.
 - Treat end-to-end verification as mandatory for meaningful changes.
 
 ## Dependency Rules
 
 - Use `pnpm` for package management.
-- Prefer updating direct dependencies in `package.json` over forcing transitive versions with `pnpm.overrides`.
-- Only use `pnpm.overrides` as a last resort when there is no reasonable upstream or direct-dependency fix.
-- If an override is truly unavoidable, keep it narrowly scoped, document why, and remove it as soon as upstream allows.
+- Prefer updating direct dependencies in `package.json` and refreshing the lockfile through normal `pnpm` resolution.
+- Do not use `pnpm.overrides` in this repository.
+- If an advisory cannot be fixed by supported direct dependency upgrades and normal lockfile resolution, leave it visible and report the upstream blocker clearly.
 - When updating Payload packages, keep the Payload package family aligned on the same version.
 - When changing dependency versions, check `README.md` for documented version numbers and update every affected entry in the `Version Info` section during the same change.
 - When updating `payload`, `@payloadcms/*`, `next`, React, Node engine requirements, package manager versions, or test tooling, verify the README still matches `package.json`.
