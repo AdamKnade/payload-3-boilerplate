@@ -10,10 +10,12 @@ import { image1 } from './image-1'
 import { image2 } from './image-2'
 import { image3 } from './image-3'
 import { image4 } from './image-4'
+import { mosCatalogImage, mosInstallImage, mosPrivacyImage } from './image-mos'
 import { post1 } from './post-1'
 import { post2 } from './post-2'
 import { post3 } from './post-3'
 import { post4 } from './post-4'
+import { post5 } from './post-5'
 
 const collections: CollectionSlug[] = [
   'categories',
@@ -151,13 +153,25 @@ export const seed = async ({
     payload.logger.info(`- Seeding media...`)
 
     // Load all files first
-    const [image1File, image2File, image3File, hero1File, vendureFile] = useLocalSeedMedia
+    const [
+      image1File,
+      image2File,
+      image3File,
+      hero1File,
+      vendureFile,
+      mosInstallFile,
+      mosCatalogFile,
+      mosPrivacyFile,
+    ] = useLocalSeedMedia
       ? await Promise.all([
           loadSeedFile('image-post1.webp'),
           loadSeedFile('image-post2.webp'),
           loadSeedFile('image-post3.webp'),
           loadSeedFile('image-hero1.webp'),
           loadSeedFile('image-post3.webp', 'image-post4.webp'),
+          loadSeedFile('mos-app-detail-install.webp'),
+          loadSeedFile('mos-app-catalog.webp'),
+          loadSeedFile('mos-privacy-posture.webp'),
         ])
       : await Promise.all([
           fetchFileByURL(
@@ -175,12 +189,30 @@ export const seed = async ({
           fetchFileByURL(
             'https://res-1.cloudinary.com/hczpmiapo/image/upload/q_auto/v1/ghost-blog-images/vendure-cover.png',
           ),
+          fetchFileByURL(
+            'https://raw.githubusercontent.com/rpuls/my-own-suite/main/site/src/assets/screenshots/app-detail-install.png',
+          ),
+          fetchFileByURL(
+            'https://raw.githubusercontent.com/rpuls/my-own-suite/main/site/src/assets/screenshots/app-catalog.png',
+          ),
+          fetchFileByURL(
+            'https://raw.githubusercontent.com/rpuls/my-own-suite/main/site/src/assets/screenshots/privacy-posture.png',
+          ),
         ])
 
     payload.logger.info(`- Creating media documents...`)
 
     // Create media documents
-    const [image1Doc, image2Doc, image3Doc, imageHomeDoc, image4Doc] = await Promise.all([
+    const [
+      image1Doc,
+      image2Doc,
+      image3Doc,
+      imageHomeDoc,
+      image4Doc,
+      mosInstallDoc,
+      mosCatalogDoc,
+      mosPrivacyDoc,
+    ] = await Promise.all([
       payload.create({
         collection: 'media',
         data: image1,
@@ -205,6 +237,21 @@ export const seed = async ({
         collection: 'media',
         data: image4,
         file: vendureFile
+      }),
+      payload.create({
+        collection: 'media',
+        data: mosInstallImage,
+        file: mosInstallFile
+      }),
+      payload.create({
+        collection: 'media',
+        data: mosCatalogImage,
+        file: mosCatalogFile
+      }),
+      payload.create({
+        collection: 'media',
+        data: mosPrivacyImage,
+        file: mosPrivacyFile
       })
     ])
 
@@ -213,6 +260,9 @@ export const seed = async ({
     let image3ID: number | string = image3Doc.id
     let image4ID: number | string = image4Doc.id
     let imageHomeID: number | string = imageHomeDoc.id
+    let mosInstallID: number | string = mosInstallDoc.id
+    let mosCatalogID: number | string = mosCatalogDoc.id
+    let mosPrivacyID: number | string = mosPrivacyDoc.id
 
     if (payload.db.defaultIDType === 'text') {
       image1ID = `"${image1Doc.id}"`
@@ -220,6 +270,9 @@ export const seed = async ({
       image3ID = `"${image3Doc.id}"`
       image4ID = `"${image4Doc.id}"`
       imageHomeID = `"${imageHomeDoc.id}"`
+      mosInstallID = `"${mosInstallDoc.id}"`
+      mosCatalogID = `"${mosCatalogDoc.id}"`
+      mosPrivacyID = `"${mosPrivacyDoc.id}"`
       demoAuthorID = `"${demoAuthorID}"`
     }
 
@@ -312,6 +365,19 @@ export const seed = async ({
       )
     })
 
+    // Seeded last on purpose: posts are listed by `-createdAt`, so the newest document
+    // is the one that appears first on /posts and in the home page archive block.
+    const post5Doc = await payload.create({
+      collection: 'posts',
+      data: JSON.parse(
+        JSON.stringify({ ...post5, categories: [technologyCategory.id] })
+          .replace(/"\{\{IMAGE_1\}\}"/g, String(mosInstallID))
+          .replace(/"\{\{IMAGE_2\}\}"/g, String(mosCatalogID))
+          .replace(/"\{\{IMAGE_3\}\}"/g, String(mosPrivacyID))
+          .replace(/"\{\{AUTHOR\}\}"/g, String(demoAuthorID))
+      )
+    })
+
     // Clear any existing search documents
     await payload.delete({
       collection: 'search',
@@ -329,7 +395,7 @@ export const seed = async ({
         id: post1Doc.id,
         collection: 'posts',
         data: {
-          relatedPosts: [post2Doc.id, post3Doc.id, post4Doc.id]
+          relatedPosts: [post5Doc.id, post2Doc.id, post3Doc.id]
         }
       })
 
@@ -337,7 +403,7 @@ export const seed = async ({
         id: post2Doc.id,
         collection: 'posts',
         data: {
-          relatedPosts: [post1Doc.id, post3Doc.id, post4Doc.id]
+          relatedPosts: [post5Doc.id, post1Doc.id, post3Doc.id]
         }
       })
 
@@ -345,12 +411,20 @@ export const seed = async ({
         id: post3Doc.id,
         collection: 'posts',
         data: {
-          relatedPosts: [post1Doc.id, post2Doc.id, post4Doc.id]
+          relatedPosts: [post5Doc.id, post1Doc.id, post2Doc.id]
         }
       })
 
       await payload.update({
         id: post4Doc.id,
+        collection: 'posts',
+        data: {
+          relatedPosts: [post5Doc.id, post1Doc.id, post2Doc.id]
+        }
+      })
+
+      await payload.update({
+        id: post5Doc.id,
         collection: 'posts',
         data: {
           relatedPosts: [post1Doc.id, post2Doc.id, post3Doc.id]
