@@ -159,10 +159,9 @@ async function getApprovedCommentCount(page: Page) {
 }
 
 async function verifySeededPosts(page: Page) {
-  await page.goto('/posts')
-  await expect(page.getByRole('heading', { name: 'Posts' })).toBeVisible()
-
   for (const post of seededPosts) {
+    await page.goto('/posts')
+    await expect(page.getByRole('heading', { name: 'Posts' })).toBeVisible()
     await expect(page.getByRole('link', { name: post.title })).toBeVisible()
 
     const response = await page.goto(`/posts/${post.slug}`)
