@@ -2364,6 +2364,27 @@ export interface Footer {
         id?: string | null;
       }[]
     | null;
+  /**
+   * The address/phone/hours line shown at the very bottom of the footer.
+   */
+  businessInfo?: {
+    /**
+     * e.g. "625 N. Kingsbury, Chicago, IL 60654"
+     */
+    address?: string | null;
+    /**
+     * e.g. "312-285-2429"
+     */
+    phone?: string | null;
+    /**
+     * e.g. "Monday through Friday 7:00 AM – 7:00 PM"
+     */
+    hoursWeekday?: string | null;
+    /**
+     * e.g. "Saturday & Sunday: 9:00 AM – 6:00 PM"
+     */
+    hoursWeekend?: string | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2418,6 +2439,14 @@ export interface FooterSelect<T extends boolean = true> {
         icon?: T;
         href?: T;
         id?: T;
+      };
+  businessInfo?:
+    | T
+    | {
+        address?: T;
+        phone?: T;
+        hoursWeekday?: T;
+        hoursWeekend?: T;
       };
   updatedAt?: T;
   createdAt?: T;

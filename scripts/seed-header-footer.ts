@@ -53,6 +53,12 @@ await payload.updateGlobal({
       { label: 'Facebook', icon: '●', href: '#' },
       { label: 'Email', icon: '✉', href: 'mailto:hello@topdog.example' },
     ],
+    businessInfo: {
+      address: '625 N. Kingsbury, Chicago, IL 60654',
+      phone: '312-285-2429',
+      hoursWeekday: 'Monday through Friday 7:00 AM – 7:00 PM',
+      hoursWeekend: 'Saturday & Sunday: 9:00 AM – 6:00 PM',
+    },
   },
 })
 
