@@ -19,6 +19,16 @@ export const Header: GlobalConfig = {
       ],
       maxRows: 6,
     },
+    {
+      name: 'ctaLabel',
+      type: 'text',
+      defaultValue: 'Membership',
+    },
+    {
+      name: 'ctaHref',
+      type: 'text',
+      defaultValue: '#membership',
+    },
   ],
   hooks: {
     afterChange: [revalidateHeader],

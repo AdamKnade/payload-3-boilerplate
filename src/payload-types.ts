@@ -2324,6 +2324,8 @@ export interface Header {
         id?: string | null;
       }[]
     | null;
+  ctaLabel?: string | null;
+  ctaHref?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2345,6 +2347,20 @@ export interface Footer {
           url?: string | null;
           label: string;
         };
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks?:
+    | {
+        /**
+         * e.g. "Instagram" — used as the link's aria-label.
+         */
+        label: string;
+        /**
+         * A single glyph/character shown for this link, e.g. "◎".
+         */
+        icon: string;
+        href: string;
         id?: string | null;
       }[]
     | null;
@@ -2370,6 +2386,8 @@ export interface HeaderSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  ctaLabel?: T;
+  ctaHref?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -2391,6 +2409,14 @@ export interface FooterSelect<T extends boolean = true> {
               url?: T;
               label?: T;
             };
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        label?: T;
+        icon?: T;
+        href?: T;
         id?: T;
       };
   updatedAt?: T;
