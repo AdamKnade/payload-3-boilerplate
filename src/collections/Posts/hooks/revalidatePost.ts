@@ -9,13 +9,20 @@ export const revalidatePost: CollectionAfterChangeHook<Post> = ({
   previousDoc,
   req: { payload },
 }) => {
+  // See the matching comment in src/collections/Pages/hooks/revalidatePage.ts
+  // -- revalidatePath throws outside an active Next.js request, which must
+  // not roll back an otherwise-valid content update (e.g. from a seed script).
   if (doc._status === 'published') {
     const path = `/posts/${doc.slug}`
 
     payload.logger.info(`Revalidating post at path: ${path}`)
 
-    revalidatePath(path)
-    revalidatePath('/posts')
+    try {
+      revalidatePath(path)
+      revalidatePath('/posts')
+    } catch (error) {
+      payload.logger.warn(`Skipping revalidation of ${path} (no active Next.js request): ${error}`)
+    }
   }
 
   // If the post was previously published, we need to revalidate the old path
@@ -24,8 +31,12 @@ export const revalidatePost: CollectionAfterChangeHook<Post> = ({
 
     payload.logger.info(`Revalidating old post at path: ${oldPath}`)
 
-    revalidatePath(oldPath)
-    revalidatePath('/posts')
+    try {
+      revalidatePath(oldPath)
+      revalidatePath('/posts')
+    } catch (error) {
+      payload.logger.warn(`Skipping revalidation of ${oldPath} (no active Next.js request): ${error}`)
+    }
   }
 
   return doc
