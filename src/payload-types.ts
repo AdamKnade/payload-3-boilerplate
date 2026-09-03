@@ -184,7 +184,544 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | LogoCloudGridBlock)[];
+  layout: (
+    | {
+        image: number | Media;
+        /**
+         * Line breaks in this field become <br /> line breaks in the heading.
+         */
+        heading: string;
+        ctaLabel: string;
+        ctaHref: string;
+        width?: ('full' | '1000' | '1200' | '1400') | null;
+        tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hero';
+      }
+    | {
+        heading?: string | null;
+        introHtml?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        variant?: ('value' | 'pricing' | 'package' | 'suite') | null;
+        columns?: ('1' | '2' | '3' | '4') | null;
+        align?: ('left' | 'center') | null;
+        width?: ('full' | '1000' | '1200' | '1400') | null;
+        tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        cards: {
+          tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+          icon?: string | null;
+          image?: (number | null) | Media;
+          eyebrow?: string | null;
+          title: string;
+          subtitle?: string | null;
+          value?: string | null;
+          bodyHtml?: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          cta: {
+            label: string;
+            href: string;
+            id?: string | null;
+          };
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'cards';
+      }
+    | {
+        bodyHtml: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        ctas: {
+          label: string;
+          href: string;
+          id?: string | null;
+        }[];
+        align?: ('left' | 'center') | null;
+        textWidth?: ('600' | '800' | '1000' | '1200') | null;
+        width?: ('full' | '1000' | '1200' | '1400') | null;
+        tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        paddingTop?: ('none' | 'compact' | 'standard' | 'roomy') | null;
+        paddingBottom?: ('none' | 'compact' | 'standard' | 'roomy') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'ctaBlock';
+      }
+    | {
+        eyebrow?: string | null;
+        heading: string;
+        value?: string | null;
+        bodyHtml?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        image?: (number | null) | Media;
+        layout?: ('centered' | 'split' | 'compact') | null;
+        ctas?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        width?: ('full' | '1000' | '1200' | '1400') | null;
+        tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'callout';
+      }
+    | {
+        /**
+         * Sets the section’s HTML id, for links like #membership.
+         */
+        blockId?: string | null;
+        display?: ('plain' | 'separated' | 'cards') | null;
+        columnCount?: ('1' | '2' | '3' | '4') | null;
+        footerHtml?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        divider?: boolean | null;
+        width?: ('full' | '1000' | '1200' | '1400') | null;
+        tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        padding?: ('none' | 'small' | 'medium' | 'large') | null;
+        columns: {
+          bodyHtml: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          ctas?:
+            | {
+                label: string;
+                href: string;
+                id?: string | null;
+              }[]
+            | null;
+          tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'columns';
+      }
+    | {
+        /**
+         * Sets the section’s HTML id, for links like #membership.
+         */
+        blockId?: string | null;
+        eyebrow?: string | null;
+        heading?: string | null;
+        bodyHtml: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        align?: ('left' | 'center') | null;
+        textWidth?: ('600' | '800' | '1000') | null;
+        width?: ('full' | '1000' | '1200' | '1400') | null;
+        tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        cta: {
+          label: string;
+          href: string;
+          id?: string | null;
+        };
+        paddingTop?: ('none' | 'compact' | 'standard' | 'roomy') | null;
+        paddingBottom?: ('none' | 'compact' | 'standard' | 'roomy') | null;
+        floatingMedia: {
+          image: number | Media;
+          caption?: string | null;
+          subCaption?: string | null;
+          position?: ('left' | 'right') | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'richText';
+      }
+    | {
+        heading?: string | null;
+        introHtml?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        variant?: ('standard' | 'pricing' | 'compact') | null;
+        align?: ('left' | 'center') | null;
+        /**
+         * Zero-based row index to visually highlight (optional).
+         */
+        highlightedRow?: number | null;
+        footnotesHtml?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        cta: {
+          label: string;
+          href: string;
+          id?: string | null;
+        };
+        width?: ('full' | '1000' | '1200' | '1400') | null;
+        tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        headers: {
+          value: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+        }[];
+        rows: {
+          cells: {
+            value: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            id?: string | null;
+          }[];
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'dataTable';
+      }
+    | {
+        /**
+         * Sets the section’s HTML id, for links like #membership.
+         */
+        blockId?: string | null;
+        heading?: string | null;
+        introHtml?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        width?: ('full' | '1000' | '1200' | '1400') | null;
+        tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        items: {
+          question: string;
+          answerHtml: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'faq';
+      }
+    | {
+        /**
+         * Sets the section’s HTML id, for links like #membership.
+         */
+        blockId?: string | null;
+        heading?: string | null;
+        introHtml?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        columns?: ('1' | '2') | null;
+        numbered?: boolean | null;
+        width?: ('full' | '1000' | '1200' | '1400') | null;
+        tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        items: {
+          icon?: string | null;
+          title: string;
+          bodyHtml: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'featureList';
+      }
+    | {
+        image: number | Media;
+        /**
+         * Falls back to the media item’s own alt text if left blank.
+         */
+        alt?: string | null;
+        /**
+         * CSS aspect-ratio value, e.g. "16 / 9".
+         */
+        aspectRatio?: string | null;
+        mobileAspectRatio?: string | null;
+        objectPosition?: string | null;
+        loading?: ('eager' | 'lazy') | null;
+        width?: ('full' | '1000' | '1200' | '1400') | null;
+        tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'imageBlock';
+      }
+    | {
+        image: number | Media;
+        eyebrow?: string | null;
+        heading?: string | null;
+        bodyHtml: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        mediaPosition?: ('left' | 'right') | null;
+        ctas?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        width?: ('full' | '1000' | '1200' | '1400') | null;
+        tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'mediaContent';
+      }
+    | {
+        heading?: string | null;
+        introHtml?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        variant?: ('detailed' | 'compact' | 'menu') | null;
+        columns?: ('1' | '2') | null;
+        cta: {
+          label: string;
+          href: string;
+          id?: string | null;
+        };
+        width?: ('full' | '1000' | '1200' | '1400') | null;
+        tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        offers: {
+          title: string;
+          bodyHtml?: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          value?: string | null;
+          badge?: string | null;
+          icon?: string | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'offerList';
+      }
+    | {
+        behavior?: ('switch' | 'navigate') | null;
+        activeService?: ('daycare' | 'overnight' | 'enrichment' | 'spa') | null;
+        width?: ('full' | '1000' | '1200' | '1400') | null;
+        tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'serviceNavigation';
+      }
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | LogoCloudGridBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -946,6 +1483,301 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
+        hero?:
+          | T
+          | {
+              image?: T;
+              heading?: T;
+              ctaLabel?: T;
+              ctaHref?: T;
+              width?: T;
+              tone?: T;
+              id?: T;
+              blockName?: T;
+            };
+        cards?:
+          | T
+          | {
+              heading?: T;
+              introHtml?: T;
+              variant?: T;
+              columns?: T;
+              align?: T;
+              width?: T;
+              tone?: T;
+              cards?:
+                | T
+                | {
+                    tone?: T;
+                    icon?: T;
+                    image?: T;
+                    eyebrow?: T;
+                    title?: T;
+                    subtitle?: T;
+                    value?: T;
+                    bodyHtml?: T;
+                    cta?:
+                      | T
+                      | {
+                          label?: T;
+                          href?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        ctaBlock?:
+          | T
+          | {
+              bodyHtml?: T;
+              ctas?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              align?: T;
+              textWidth?: T;
+              width?: T;
+              tone?: T;
+              paddingTop?: T;
+              paddingBottom?: T;
+              id?: T;
+              blockName?: T;
+            };
+        callout?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              value?: T;
+              bodyHtml?: T;
+              image?: T;
+              layout?: T;
+              ctas?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              width?: T;
+              tone?: T;
+              id?: T;
+              blockName?: T;
+            };
+        columns?:
+          | T
+          | {
+              blockId?: T;
+              display?: T;
+              columnCount?: T;
+              footerHtml?: T;
+              divider?: T;
+              width?: T;
+              tone?: T;
+              padding?: T;
+              columns?:
+                | T
+                | {
+                    bodyHtml?: T;
+                    ctas?:
+                      | T
+                      | {
+                          label?: T;
+                          href?: T;
+                          id?: T;
+                        };
+                    tone?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        richText?:
+          | T
+          | {
+              blockId?: T;
+              eyebrow?: T;
+              heading?: T;
+              bodyHtml?: T;
+              align?: T;
+              textWidth?: T;
+              width?: T;
+              tone?: T;
+              cta?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              paddingTop?: T;
+              paddingBottom?: T;
+              floatingMedia?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    subCaption?: T;
+                    position?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        dataTable?:
+          | T
+          | {
+              heading?: T;
+              introHtml?: T;
+              variant?: T;
+              align?: T;
+              highlightedRow?: T;
+              footnotesHtml?: T;
+              cta?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              width?: T;
+              tone?: T;
+              headers?:
+                | T
+                | {
+                    value?: T;
+                    id?: T;
+                  };
+              rows?:
+                | T
+                | {
+                    cells?:
+                      | T
+                      | {
+                          value?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        faq?:
+          | T
+          | {
+              blockId?: T;
+              heading?: T;
+              introHtml?: T;
+              width?: T;
+              tone?: T;
+              items?:
+                | T
+                | {
+                    question?: T;
+                    answerHtml?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        featureList?:
+          | T
+          | {
+              blockId?: T;
+              heading?: T;
+              introHtml?: T;
+              columns?: T;
+              numbered?: T;
+              width?: T;
+              tone?: T;
+              items?:
+                | T
+                | {
+                    icon?: T;
+                    title?: T;
+                    bodyHtml?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        imageBlock?:
+          | T
+          | {
+              image?: T;
+              alt?: T;
+              aspectRatio?: T;
+              mobileAspectRatio?: T;
+              objectPosition?: T;
+              loading?: T;
+              width?: T;
+              tone?: T;
+              id?: T;
+              blockName?: T;
+            };
+        mediaContent?:
+          | T
+          | {
+              image?: T;
+              eyebrow?: T;
+              heading?: T;
+              bodyHtml?: T;
+              mediaPosition?: T;
+              ctas?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              width?: T;
+              tone?: T;
+              id?: T;
+              blockName?: T;
+            };
+        offerList?:
+          | T
+          | {
+              heading?: T;
+              introHtml?: T;
+              variant?: T;
+              columns?: T;
+              cta?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              width?: T;
+              tone?: T;
+              offers?:
+                | T
+                | {
+                    title?: T;
+                    bodyHtml?: T;
+                    value?: T;
+                    badge?: T;
+                    icon?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        serviceNavigation?:
+          | T
+          | {
+              behavior?: T;
+              activeService?: T;
+              width?: T;
+              tone?: T;
+              id?: T;
+              blockName?: T;
+            };
         cta?: T | CallToActionBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
