@@ -64,6 +64,16 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
     },
+    // Explicitly off: the adapter otherwise auto-pushes schema on any local
+    // `getPayload()` init that isn't NODE_ENV=production, which silently
+    // drifts the DB ahead of the tracked migration history and inserts a
+    // batch:-1 marker row. That marker makes `payload migrate` show an
+    // interactive confirmation prompt with no non-interactive bypass --
+    // which just hangs forever on Railway's non-TTY build. Caused several
+    // stuck deploys before being traced to this. This project already uses
+    // explicit migrations (`payload migrate:create`) for every schema
+    // change, so push is never wanted here.
+    push: false,
   }),
   collections: [Pages, Posts, Media, Categories, Users, Comments],
   cors: [getServerSideURL()].filter(Boolean),
