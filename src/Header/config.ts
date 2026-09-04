@@ -29,6 +29,11 @@ export const Header: GlobalConfig = {
       type: 'text',
       defaultValue: '#membership',
     },
+    {
+      name: 'loginHref',
+      type: 'text',
+      admin: { description: 'The small round "Member login" icon — link to the Gingr customer portal login.' },
+    },
   ],
   hooks: {
     afterChange: [revalidateHeader],

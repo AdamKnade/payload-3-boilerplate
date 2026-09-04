@@ -32,6 +32,7 @@ await payload.updateGlobal({
     ],
     ctaLabel: 'Membership',
     ctaHref: '#membership',
+    loginHref: 'https://topdogchicago.portal.gingrapp.com',
   },
 })
 

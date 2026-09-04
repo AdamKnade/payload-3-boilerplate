@@ -715,6 +715,25 @@ export interface Page {
         blockName?: string | null;
         blockType: 'serviceNavigation';
       }
+    | {
+        /**
+         * Admin-only note to identify this embed in the block list, e.g. "Gingr Lead Form".
+         */
+        label?: string | null;
+        /**
+         * External script URL, if the embed needs one (e.g. Gingr's bundle.js). Leave blank if not needed.
+         */
+        scriptSrc?: string | null;
+        /**
+         * The target markup Gingr (or another provider) gives you for where the widget should render.
+         */
+        embedHtml?: string | null;
+        width?: ('full' | '1000' | '1200' | '1400') | null;
+        tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'embedCode';
+      }
     | CallToActionBlock
     | ContentBlock
     | MediaBlock
@@ -1778,6 +1797,17 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        embedCode?:
+          | T
+          | {
+              label?: T;
+              scriptSrc?: T;
+              embedHtml?: T;
+              width?: T;
+              tone?: T;
+              id?: T;
+              blockName?: T;
+            };
         cta?: T | CallToActionBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
@@ -2326,6 +2356,10 @@ export interface Header {
     | null;
   ctaLabel?: string | null;
   ctaHref?: string | null;
+  /**
+   * The small round "Member login" icon — link to the Gingr customer portal login.
+   */
+  loginHref?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2409,6 +2443,7 @@ export interface HeaderSelect<T extends boolean = true> {
       };
   ctaLabel?: T;
   ctaHref?: T;
+  loginHref?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

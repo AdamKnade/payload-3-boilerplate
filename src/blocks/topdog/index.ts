@@ -11,6 +11,7 @@ import { ImageBlock } from './ImageBlock/config';
 import { MediaContent } from './MediaContent/config';
 import { OfferList } from './OfferList/config';
 import { ServiceNavigation } from './ServiceNavigation/config';
+import { EmbedCode } from './EmbedCode/config';
 
 export const topDogBlocks = [
   Hero,
@@ -26,4 +27,5 @@ export const topDogBlocks = [
   MediaContent,
   OfferList,
   ServiceNavigation,
+  EmbedCode,
 ];
