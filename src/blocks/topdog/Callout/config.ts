@@ -7,7 +7,7 @@ export const Callout: Block = {
     { name: 'eyebrow', type: 'text' },
     { name: 'heading', type: 'text', required: true },
     { name: 'value', type: 'text' },
-    { name: 'bodyHtml', type: 'richText' },
+    { name: 'bodyHtml', type: 'richText', label: 'Body' },
     { name: 'image', type: 'upload', relationTo: 'media' },
     { name: 'layout', type: 'select', defaultValue: 'centered', options: ['centered', 'split', 'compact'] },
     { name: 'ctas', type: 'array', fields: ctaFields },

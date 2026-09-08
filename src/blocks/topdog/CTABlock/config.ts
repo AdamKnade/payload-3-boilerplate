@@ -5,7 +5,7 @@ export const CTABlock: Block = {
   slug: 'ctaBlock',
   labels: { singular: 'CTA Block', plural: 'CTA Blocks' },
   fields: [
-    { name: 'bodyHtml', type: 'richText', required: true },
+    { name: 'bodyHtml', type: 'richText', required: true, label: 'Body' },
     { name: 'ctas', type: 'array', required: true, minRows: 1, fields: ctaFields },
     { name: 'align', type: 'select', defaultValue: 'center', options: ['left', 'center'] },
     { name: 'textWidth', type: 'select', defaultValue: '1200', options: ['600', '800', '1000', '1200'] },

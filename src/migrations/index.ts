@@ -7,6 +7,7 @@ import * as migration_20260903_201241_add_header_footer_fields from './20260903_
 import * as migration_20260903_205717_add_footer_business_info from './20260903_205717_add_footer_business_info';
 import * as migration_20260903_212109_add_login_href_and_embed_block from './20260903_212109_add_login_href_and_embed_block';
 import * as migration_20260908_185210_add_cta_newtab_padding_and_columns_fields from './20260908_185210_add_cta_newtab_padding_and_columns_fields';
+import * as migration_20260908_204347_add_richtext_body_variant from './20260908_204347_add_richtext_body_variant';
 
 export const migrations = [
   {
@@ -52,6 +53,11 @@ export const migrations = [
   {
     up: migration_20260908_185210_add_cta_newtab_padding_and_columns_fields.up,
     down: migration_20260908_185210_add_cta_newtab_padding_and_columns_fields.down,
-    name: '20260908_185210_add_cta_newtab_padding_and_columns_fields'
+    name: '20260908_185210_add_cta_newtab_padding_and_columns_fields',
+  },
+  {
+    up: migration_20260908_204347_add_richtext_body_variant.up,
+    down: migration_20260908_204347_add_richtext_body_variant.down,
+    name: '20260908_204347_add_richtext_body_variant'
   },
 ];

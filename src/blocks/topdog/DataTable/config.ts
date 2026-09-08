@@ -6,11 +6,11 @@ export const DataTable: Block = {
   fields: [
     blockIdField,
     { name: 'heading', type: 'text' },
-    { name: 'introHtml', type: 'richText' },
+    { name: 'introHtml', type: 'richText', label: 'Intro' },
     { name: 'variant', type: 'select', defaultValue: 'standard', options: ['standard', 'pricing', 'compact'] },
     { name: 'align', type: 'select', defaultValue: 'left', options: ['left', 'center'] },
     { name: 'highlightedRow', type: 'number', admin: { description: 'Zero-based row index to visually highlight (optional).' } },
-    { name: 'footnotesHtml', type: 'richText' },
+    { name: 'footnotesHtml', type: 'richText', label: 'Footnotes' },
     { name: 'cta', type: 'group', fields: ctaFields },
     widthField,
     toneField(),

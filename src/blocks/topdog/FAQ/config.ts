@@ -7,7 +7,7 @@ export const FAQBlock: Block = {
   fields: [
     blockIdField,
     { name: 'heading', type: 'text', defaultValue: 'FAQs' },
-    { name: 'introHtml', type: 'richText' },
+    { name: 'introHtml', type: 'richText', label: 'Intro' },
     widthField,
     toneField(),
     paddingTopField,
@@ -16,7 +16,7 @@ export const FAQBlock: Block = {
       name: 'items', type: 'array', required: true, minRows: 1,
       fields: [
         { name: 'question', type: 'text', required: true },
-        { name: 'answerHtml', type: 'richText', required: true },
+        { name: 'answerHtml', type: 'richText', required: true, label: 'Answer' },
       ],
     },
   ],

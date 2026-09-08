@@ -6,7 +6,7 @@ export const Cards: Block = {
   fields: [
     blockIdField,
     { name: 'heading', type: 'text' },
-    { name: 'introHtml', type: 'richText' },
+    { name: 'introHtml', type: 'richText', label: 'Intro' },
     {
       name: 'variant', type: 'select', defaultValue: 'value',
       options: ['value', 'pricing', 'package', 'suite'].map((v) => ({ label: v, value: v })),
@@ -27,7 +27,7 @@ export const Cards: Block = {
         { name: 'title', type: 'text', required: true },
         { name: 'subtitle', type: 'text' },
         { name: 'value', type: 'text' },
-        { name: 'bodyHtml', type: 'richText' },
+        { name: 'bodyHtml', type: 'richText', label: 'Body' },
         { name: 'cta', type: 'group', fields: ctaFields },
       ],
     },

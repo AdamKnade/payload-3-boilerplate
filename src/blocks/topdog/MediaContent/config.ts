@@ -7,7 +7,7 @@ export const MediaContent: Block = {
     { name: 'image', type: 'upload', relationTo: 'media', required: true },
     { name: 'eyebrow', type: 'text' },
     { name: 'heading', type: 'text' },
-    { name: 'bodyHtml', type: 'richText', required: true },
+    { name: 'bodyHtml', type: 'richText', required: true, label: 'Body' },
     { name: 'mediaPosition', type: 'select', defaultValue: 'left', options: ['left', 'right'] },
     { name: 'ctas', type: 'array', fields: ctaFields },
     widthField,

@@ -5,11 +5,11 @@ export const Columns: Block = {
   slug: 'columns',
   fields: [
     { name: 'heading', type: 'text' },
-    { name: 'introHtml', type: 'richText' },
+    { name: 'introHtml', type: 'richText', label: 'Intro' },
     blockIdField,
     { name: 'display', type: 'select', defaultValue: 'plain', options: ['plain', 'separated', 'cards'] },
     { name: 'columnCount', type: 'select', defaultValue: '2', options: ['1', '2', '3', '4'] },
-    { name: 'footerHtml', type: 'richText' },
+    { name: 'footerHtml', type: 'richText', label: 'Footer note' },
     { name: 'divider', type: 'checkbox', defaultValue: false },
     widthField,
     toneField(),
@@ -35,7 +35,7 @@ export const Columns: Block = {
         { name: 'heading', type: 'text' },
         { name: 'value', type: 'text', label: 'Price / value',
           admin: { description: 'Shown large beside the heading, e.g. "$40". Needs a heading.' } },
-        { name: 'bodyHtml', type: 'richText' },
+        { name: 'bodyHtml', type: 'richText', label: 'Body' },
         { name: 'noteHtml', type: 'richText', label: 'Small print',
           admin: { description: 'Italic note below the body.' } },
         // The enrichment page's spa / room-service panels. Previously <table>

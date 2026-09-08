@@ -6,7 +6,7 @@ export const FeatureList: Block = {
   fields: [
     blockIdField,
     { name: 'heading', type: 'text' },
-    { name: 'introHtml', type: 'richText' },
+    { name: 'introHtml', type: 'richText', label: 'Intro' },
     { name: 'columns', type: 'select', defaultValue: '2', options: ['1', '2'] },
     { name: 'numbered', type: 'checkbox', defaultValue: false },
     widthField,
@@ -18,7 +18,7 @@ export const FeatureList: Block = {
       fields: [
         { name: 'icon', type: 'text' },
         { name: 'title', type: 'text', required: true },
-        { name: 'bodyHtml', type: 'richText', required: true },
+        { name: 'bodyHtml', type: 'richText', required: true, label: 'Body' },
       ],
     },
   ],
