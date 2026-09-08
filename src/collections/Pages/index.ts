@@ -12,7 +12,6 @@ import { topDogBlocks } from '../../blocks/topdog'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
-import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidatePage } from './hooks/revalidatePage'
 
 import {
@@ -22,7 +21,22 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
-import { getServerSideURL } from '@/utilities/getURL'
+
+/**
+ * Where the Astro site is serving its /preview route.
+ *
+ * Payload renders the live-preview panel in an <iframe> in the editor's own
+ * browser, so http://localhost:4321 genuinely works -- it resolves against
+ * their machine, not this container. The cost is that each editor has to be
+ * running `astro dev`. Set ASTRO_PREVIEW_URL on the service to point at a
+ * deployed instance instead. No trailing slash.
+ */
+const astroPreviewURL = () => process.env.ASTRO_PREVIEW_URL || 'http://localhost:4321'
+
+const previewSlug = (data: unknown) => {
+  const slug = (data as { slug?: unknown } | undefined)?.slug
+  return encodeURIComponent(typeof slug === 'string' ? slug : '')
+}
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -41,24 +55,17 @@ export const Pages: CollectionConfig<'pages'> = {
   },
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
+    // Preview points at the Astro site, not this app's bundled Next.js
+    // frontend: that renders a different design and knows nothing about the
+    // topdog blocks, so its preview never resembled the real site.
+    //
+    // The slug is a path segment, not a query parameter. Astro strips the
+    // query string from prerendered routes, and the Astro site builds with
+    // output: 'static', so `/preview?slug=x` always rendered its empty state.
     livePreview: {
-      url: ({ data }) => {
-        const path = generatePreviewPath({
-          slug: typeof data?.slug === 'string' ? data.slug : '',
-          collection: 'pages',
-        })
-
-        return `${getServerSideURL()}${path}`
-      },
+      url: ({ data }) => `${astroPreviewURL()}/preview/${previewSlug(data)}`,
     },
-    preview: (data) => {
-      const path = generatePreviewPath({
-        slug: typeof data?.slug === 'string' ? data.slug : '',
-        collection: 'pages',
-      })
-
-      return `${getServerSideURL()}${path}`
-    },
+    preview: (data) => `${astroPreviewURL()}/preview/${previewSlug(data)}`,
     useAsTitle: 'title',
   },
   fields: [
