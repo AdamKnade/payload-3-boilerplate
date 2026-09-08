@@ -33,9 +33,18 @@ import {
  */
 const astroPreviewURL = () => process.env.ASTRO_PREVIEW_URL || 'http://localhost:4321'
 
-const previewSlug = (data: unknown) => {
-  const slug = (data as { slug?: unknown } | undefined)?.slug
-  return encodeURIComponent(typeof slug === 'string' ? slug : '')
+/**
+ * Preview addresses a page by id, not slug.
+ *
+ * A page has an id from its first autosave; `slug` is derived from `title` and
+ * stays null until the editor types one. Keying on the slug meant a page with
+ * content but no title produced `/preview/`, which the Astro site serves as its
+ * page-list index -- so the panel showed a list instead of the page.
+ */
+const previewKey = (data: unknown) => {
+  const d = data as { id?: unknown; slug?: unknown } | undefined
+  if (d?.id !== undefined && d?.id !== null) return encodeURIComponent(String(d.id))
+  return encodeURIComponent(typeof d?.slug === 'string' ? d.slug : '')
 }
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -63,9 +72,9 @@ export const Pages: CollectionConfig<'pages'> = {
     // query string from prerendered routes, and the Astro site builds with
     // output: 'static', so `/preview?slug=x` always rendered its empty state.
     livePreview: {
-      url: ({ data }) => `${astroPreviewURL()}/preview/${previewSlug(data)}`,
+      url: ({ data }) => `${astroPreviewURL()}/preview/${previewKey(data)}`,
     },
-    preview: (data) => `${astroPreviewURL()}/preview/${previewSlug(data)}`,
+    preview: (data) => `${astroPreviewURL()}/preview/${previewKey(data)}`,
     useAsTitle: 'title',
   },
   fields: [
