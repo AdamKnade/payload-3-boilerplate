@@ -10,6 +10,7 @@ export const Hero: Block = {
     { name: 'heading', type: 'textarea', required: true, admin: { description: 'Line breaks in this field become <br /> line breaks in the heading.' } },
     { name: 'ctaLabel', type: 'text', required: true },
     { name: 'ctaHref', type: 'text', required: true },
+    { name: 'ctaNewTab', type: 'checkbox', label: 'Open in a new tab' },
     widthField,
     toneField('dark'),
   ],

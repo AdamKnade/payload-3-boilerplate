@@ -193,6 +193,7 @@ export interface Page {
         heading: string;
         ctaLabel: string;
         ctaHref: string;
+        ctaNewTab?: boolean | null;
         width?: ('full' | '1000' | '1200' | '1400') | null;
         tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
         id?: string | null;
@@ -200,6 +201,10 @@ export interface Page {
         blockType: 'hero';
       }
     | {
+        /**
+         * Sets the section’s HTML id, for links like #membership.
+         */
+        blockId?: string | null;
         heading?: string | null;
         introHtml?: {
           root: {
@@ -221,6 +226,8 @@ export interface Page {
         align?: ('left' | 'center') | null;
         width?: ('full' | '1000' | '1200' | '1400') | null;
         tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        paddingTop?: ('none' | 'compact' | 'standard' | 'roomy') | null;
+        paddingBottom?: ('none' | 'compact' | 'standard' | 'roomy') | null;
         cards: {
           tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
           icon?: string | null;
@@ -247,6 +254,10 @@ export interface Page {
           cta: {
             label: string;
             href: string;
+            /**
+             * Use for links that leave the site, e.g. the Gingr portal.
+             */
+            newTab?: boolean | null;
             id?: string | null;
           };
           id?: string | null;
@@ -274,6 +285,10 @@ export interface Page {
         ctas: {
           label: string;
           href: string;
+          /**
+           * Use for links that leave the site, e.g. the Gingr portal.
+           */
+          newTab?: boolean | null;
           id?: string | null;
         }[];
         align?: ('left' | 'center') | null;
@@ -311,16 +326,38 @@ export interface Page {
           | {
               label: string;
               href: string;
+              /**
+               * Use for links that leave the site, e.g. the Gingr portal.
+               */
+              newTab?: boolean | null;
               id?: string | null;
             }[]
           | null;
         width?: ('full' | '1000' | '1200' | '1400') | null;
         tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        paddingTop?: ('none' | 'compact' | 'standard' | 'roomy') | null;
+        paddingBottom?: ('none' | 'compact' | 'standard' | 'roomy') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'callout';
       }
     | {
+        heading?: string | null;
+        introHtml?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
         /**
          * Sets the section’s HTML id, for links like #membership.
          */
@@ -345,9 +382,15 @@ export interface Page {
         divider?: boolean | null;
         width?: ('full' | '1000' | '1200' | '1400') | null;
         tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
-        padding?: ('none' | 'small' | 'medium' | 'large') | null;
+        paddingTop?: ('none' | 'compact' | 'standard' | 'roomy') | null;
+        paddingBottom?: ('none' | 'compact' | 'standard' | 'roomy') | null;
         columns: {
-          bodyHtml: {
+          heading?: string | null;
+          /**
+           * Shown large beside the heading, e.g. "$40". Needs a heading.
+           */
+          value?: string | null;
+          bodyHtml?: {
             root: {
               type: string;
               children: {
@@ -361,11 +404,79 @@ export interface Page {
               version: number;
             };
             [k: string]: unknown;
+          } | null;
+          /**
+           * Italic note below the body.
+           */
+          noteHtml?: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          /**
+           * Leave the rows empty if this column has no table.
+           */
+          table: {
+            headers?:
+              | {
+                  value: string;
+                  id?: string | null;
+                }[]
+              | null;
+            rows?:
+              | {
+                  cells?:
+                    | {
+                        value: string;
+                        id?: string | null;
+                      }[]
+                    | null;
+                  id?: string | null;
+                }[]
+              | null;
+            footnoteHtml?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            cta: {
+              label: string;
+              href: string;
+              /**
+               * Use for links that leave the site, e.g. the Gingr portal.
+               */
+              newTab?: boolean | null;
+              id?: string | null;
+            };
           };
           ctas?:
             | {
                 label: string;
                 href: string;
+                /**
+                 * Use for links that leave the site, e.g. the Gingr portal.
+                 */
+                newTab?: boolean | null;
                 id?: string | null;
               }[]
             | null;
@@ -405,6 +516,10 @@ export interface Page {
         cta: {
           label: string;
           href: string;
+          /**
+           * Use for links that leave the site, e.g. the Gingr portal.
+           */
+          newTab?: boolean | null;
           id?: string | null;
         };
         paddingTop?: ('none' | 'compact' | 'standard' | 'roomy') | null;
@@ -420,6 +535,10 @@ export interface Page {
         blockType: 'richText';
       }
     | {
+        /**
+         * Sets the section’s HTML id, for links like #membership.
+         */
+        blockId?: string | null;
         heading?: string | null;
         introHtml?: {
           root: {
@@ -460,10 +579,16 @@ export interface Page {
         cta: {
           label: string;
           href: string;
+          /**
+           * Use for links that leave the site, e.g. the Gingr portal.
+           */
+          newTab?: boolean | null;
           id?: string | null;
         };
         width?: ('full' | '1000' | '1200' | '1400') | null;
         tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        paddingTop?: ('none' | 'compact' | 'standard' | 'roomy') | null;
+        paddingBottom?: ('none' | 'compact' | 'standard' | 'roomy') | null;
         headers: {
           value: {
             root: {
@@ -530,6 +655,8 @@ export interface Page {
         } | null;
         width?: ('full' | '1000' | '1200' | '1400') | null;
         tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        paddingTop?: ('none' | 'compact' | 'standard' | 'roomy') | null;
+        paddingBottom?: ('none' | 'compact' | 'standard' | 'roomy') | null;
         items: {
           question: string;
           answerHtml: {
@@ -578,6 +705,8 @@ export interface Page {
         numbered?: boolean | null;
         width?: ('full' | '1000' | '1200' | '1400') | null;
         tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        paddingTop?: ('none' | 'compact' | 'standard' | 'roomy') | null;
+        paddingBottom?: ('none' | 'compact' | 'standard' | 'roomy') | null;
         items: {
           icon?: string | null;
           title: string;
@@ -645,16 +774,26 @@ export interface Page {
           | {
               label: string;
               href: string;
+              /**
+               * Use for links that leave the site, e.g. the Gingr portal.
+               */
+              newTab?: boolean | null;
               id?: string | null;
             }[]
           | null;
         width?: ('full' | '1000' | '1200' | '1400') | null;
         tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        paddingTop?: ('none' | 'compact' | 'standard' | 'roomy') | null;
+        paddingBottom?: ('none' | 'compact' | 'standard' | 'roomy') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'mediaContent';
       }
     | {
+        /**
+         * Sets the section’s HTML id, for links like #membership.
+         */
+        blockId?: string | null;
         heading?: string | null;
         introHtml?: {
           root: {
@@ -676,10 +815,16 @@ export interface Page {
         cta: {
           label: string;
           href: string;
+          /**
+           * Use for links that leave the site, e.g. the Gingr portal.
+           */
+          newTab?: boolean | null;
           id?: string | null;
         };
         width?: ('full' | '1000' | '1200' | '1400') | null;
         tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        paddingTop?: ('none' | 'compact' | 'standard' | 'roomy') | null;
+        paddingBottom?: ('none' | 'compact' | 'standard' | 'roomy') | null;
         offers: {
           title: string;
           bodyHtml?: {
@@ -711,6 +856,8 @@ export interface Page {
         activeService?: ('daycare' | 'overnight' | 'enrichment' | 'spa') | null;
         width?: ('full' | '1000' | '1200' | '1400') | null;
         tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        paddingTop?: ('none' | 'compact' | 'standard' | 'roomy') | null;
+        paddingBottom?: ('none' | 'compact' | 'standard' | 'roomy') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'serviceNavigation';
@@ -730,6 +877,8 @@ export interface Page {
         embedHtml?: string | null;
         width?: ('full' | '1000' | '1200' | '1400') | null;
         tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
+        paddingTop?: ('none' | 'compact' | 'standard' | 'roomy') | null;
+        paddingBottom?: ('none' | 'compact' | 'standard' | 'roomy') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'embedCode';
@@ -1509,6 +1658,7 @@ export interface PagesSelect<T extends boolean = true> {
               heading?: T;
               ctaLabel?: T;
               ctaHref?: T;
+              ctaNewTab?: T;
               width?: T;
               tone?: T;
               id?: T;
@@ -1517,6 +1667,7 @@ export interface PagesSelect<T extends boolean = true> {
         cards?:
           | T
           | {
+              blockId?: T;
               heading?: T;
               introHtml?: T;
               variant?: T;
@@ -1524,6 +1675,8 @@ export interface PagesSelect<T extends boolean = true> {
               align?: T;
               width?: T;
               tone?: T;
+              paddingTop?: T;
+              paddingBottom?: T;
               cards?:
                 | T
                 | {
@@ -1540,6 +1693,7 @@ export interface PagesSelect<T extends boolean = true> {
                       | {
                           label?: T;
                           href?: T;
+                          newTab?: T;
                           id?: T;
                         };
                     id?: T;
@@ -1556,6 +1710,7 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     label?: T;
                     href?: T;
+                    newTab?: T;
                     id?: T;
                   };
               align?: T;
@@ -1581,16 +1736,21 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     label?: T;
                     href?: T;
+                    newTab?: T;
                     id?: T;
                   };
               width?: T;
               tone?: T;
+              paddingTop?: T;
+              paddingBottom?: T;
               id?: T;
               blockName?: T;
             };
         columns?:
           | T
           | {
+              heading?: T;
+              introHtml?: T;
               blockId?: T;
               display?: T;
               columnCount?: T;
@@ -1598,16 +1758,51 @@ export interface PagesSelect<T extends boolean = true> {
               divider?: T;
               width?: T;
               tone?: T;
-              padding?: T;
+              paddingTop?: T;
+              paddingBottom?: T;
               columns?:
                 | T
                 | {
+                    heading?: T;
+                    value?: T;
                     bodyHtml?: T;
+                    noteHtml?: T;
+                    table?:
+                      | T
+                      | {
+                          headers?:
+                            | T
+                            | {
+                                value?: T;
+                                id?: T;
+                              };
+                          rows?:
+                            | T
+                            | {
+                                cells?:
+                                  | T
+                                  | {
+                                      value?: T;
+                                      id?: T;
+                                    };
+                                id?: T;
+                              };
+                          footnoteHtml?: T;
+                          cta?:
+                            | T
+                            | {
+                                label?: T;
+                                href?: T;
+                                newTab?: T;
+                                id?: T;
+                              };
+                        };
                     ctas?:
                       | T
                       | {
                           label?: T;
                           href?: T;
+                          newTab?: T;
                           id?: T;
                         };
                     tone?: T;
@@ -1632,6 +1827,7 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     label?: T;
                     href?: T;
+                    newTab?: T;
                     id?: T;
                   };
               paddingTop?: T;
@@ -1650,6 +1846,7 @@ export interface PagesSelect<T extends boolean = true> {
         dataTable?:
           | T
           | {
+              blockId?: T;
               heading?: T;
               introHtml?: T;
               variant?: T;
@@ -1661,10 +1858,13 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     label?: T;
                     href?: T;
+                    newTab?: T;
                     id?: T;
                   };
               width?: T;
               tone?: T;
+              paddingTop?: T;
+              paddingBottom?: T;
               headers?:
                 | T
                 | {
@@ -1693,6 +1893,8 @@ export interface PagesSelect<T extends boolean = true> {
               introHtml?: T;
               width?: T;
               tone?: T;
+              paddingTop?: T;
+              paddingBottom?: T;
               items?:
                 | T
                 | {
@@ -1713,6 +1915,8 @@ export interface PagesSelect<T extends boolean = true> {
               numbered?: T;
               width?: T;
               tone?: T;
+              paddingTop?: T;
+              paddingBottom?: T;
               items?:
                 | T
                 | {
@@ -1751,16 +1955,20 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     label?: T;
                     href?: T;
+                    newTab?: T;
                     id?: T;
                   };
               width?: T;
               tone?: T;
+              paddingTop?: T;
+              paddingBottom?: T;
               id?: T;
               blockName?: T;
             };
         offerList?:
           | T
           | {
+              blockId?: T;
               heading?: T;
               introHtml?: T;
               variant?: T;
@@ -1770,10 +1978,13 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     label?: T;
                     href?: T;
+                    newTab?: T;
                     id?: T;
                   };
               width?: T;
               tone?: T;
+              paddingTop?: T;
+              paddingBottom?: T;
               offers?:
                 | T
                 | {
@@ -1794,6 +2005,8 @@ export interface PagesSelect<T extends boolean = true> {
               activeService?: T;
               width?: T;
               tone?: T;
+              paddingTop?: T;
+              paddingBottom?: T;
               id?: T;
               blockName?: T;
             };
@@ -1805,6 +2018,8 @@ export interface PagesSelect<T extends boolean = true> {
               embedHtml?: T;
               width?: T;
               tone?: T;
+              paddingTop?: T;
+              paddingBottom?: T;
               id?: T;
               blockName?: T;
             };

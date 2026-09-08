@@ -1,9 +1,10 @@
 import type { Block } from 'payload';
-import { widthField, toneField, ctaFields } from '../_shared/fields';
+import { blockIdField, widthField, toneField, ctaFields, paddingTopField, paddingBottomField } from '../_shared/fields';
 
 export const DataTable: Block = {
   slug: 'dataTable',
   fields: [
+    blockIdField,
     { name: 'heading', type: 'text' },
     { name: 'introHtml', type: 'richText' },
     { name: 'variant', type: 'select', defaultValue: 'standard', options: ['standard', 'pricing', 'compact'] },
@@ -13,6 +14,8 @@ export const DataTable: Block = {
     { name: 'cta', type: 'group', fields: ctaFields },
     widthField,
     toneField(),
+    paddingTopField,
+    paddingBottomField,
     { name: 'headers', type: 'array', required: true, minRows: 1, fields: [{ name: 'value', type: 'richText', required: true }] },
     {
       name: 'rows', type: 'array', required: true, minRows: 1,

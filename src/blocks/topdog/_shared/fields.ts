@@ -47,4 +47,8 @@ export const blockIdField: Field = { name: 'blockId', type: 'text', label: 'Anch
 export const ctaFields: Field[] = [
   { name: 'label', type: 'text', required: true },
   { name: 'href', type: 'text', required: true },
+  // Every Gingr booking link on the site opens in a new tab. Without this
+  // field a CMS-authored CTA can only ever open in the same tab.
+  { name: 'newTab', type: 'checkbox', label: 'Open in a new tab',
+    admin: { description: 'Use for links that leave the site, e.g. the Gingr portal.' } },
 ];

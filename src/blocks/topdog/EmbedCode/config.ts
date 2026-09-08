@@ -1,5 +1,5 @@
 import type { Block } from 'payload';
-import { widthField, toneField } from '../_shared/fields';
+import { widthField, toneField, paddingTopField, paddingBottomField } from '../_shared/fields';
 
 // For third-party JS widgets (e.g. Gingr's Lead Form / Photostream embeds)
 // that ship as a <script src="..."> plus a target snippet. Deliberately
@@ -21,5 +21,7 @@ export const EmbedCode: Block = {
     },
     widthField,
     toneField(),
+    paddingTopField,
+    paddingBottomField,
   ],
 };

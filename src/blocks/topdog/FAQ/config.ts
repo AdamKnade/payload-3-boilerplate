@@ -1,5 +1,5 @@
 import type { Block } from 'payload';
-import { widthField, toneField, blockIdField } from '../_shared/fields';
+import { widthField, toneField, blockIdField, paddingTopField, paddingBottomField } from '../_shared/fields';
 
 export const FAQBlock: Block = {
   slug: 'faq',
@@ -10,6 +10,8 @@ export const FAQBlock: Block = {
     { name: 'introHtml', type: 'richText' },
     widthField,
     toneField(),
+    paddingTopField,
+    paddingBottomField,
     {
       name: 'items', type: 'array', required: true, minRows: 1,
       fields: [

@@ -1,9 +1,10 @@
 import type { Block } from 'payload';
-import { widthField, toneField, ctaFields } from '../_shared/fields';
+import { blockIdField, widthField, toneField, ctaFields, paddingTopField, paddingBottomField } from '../_shared/fields';
 
 export const Cards: Block = {
   slug: 'cards',
   fields: [
+    blockIdField,
     { name: 'heading', type: 'text' },
     { name: 'introHtml', type: 'richText' },
     {
@@ -14,6 +15,8 @@ export const Cards: Block = {
     { name: 'align', type: 'select', defaultValue: 'left', options: ['left', 'center'] },
     widthField,
     toneField(),
+    paddingTopField,
+    paddingBottomField,
     {
       name: 'cards', type: 'array', required: true, minRows: 1,
       fields: [

@@ -1,5 +1,5 @@
 import type { Block } from 'payload';
-import { widthField, toneField, ctaFields } from '../_shared/fields';
+import { widthField, toneField, ctaFields, paddingTopField, paddingBottomField } from '../_shared/fields';
 
 export const Callout: Block = {
   slug: 'callout',
@@ -13,5 +13,7 @@ export const Callout: Block = {
     { name: 'ctas', type: 'array', fields: ctaFields },
     widthField,
     toneField('beige'),
+    paddingTopField,
+    paddingBottomField,
   ],
 };

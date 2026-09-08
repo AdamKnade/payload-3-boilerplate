@@ -1,5 +1,5 @@
 import type { Block } from 'payload';
-import { widthField, toneField, ctaFields } from '../_shared/fields';
+import { widthField, toneField, ctaFields, paddingTopField, paddingBottomField } from '../_shared/fields';
 
 export const MediaContent: Block = {
   slug: 'mediaContent',
@@ -12,5 +12,7 @@ export const MediaContent: Block = {
     { name: 'ctas', type: 'array', fields: ctaFields },
     widthField,
     toneField(),
+    paddingTopField,
+    paddingBottomField,
   ],
 };

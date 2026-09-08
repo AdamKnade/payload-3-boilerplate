@@ -1,5 +1,5 @@
 import type { Block } from 'payload';
-import { widthField, toneField, blockIdField } from '../_shared/fields';
+import { widthField, toneField, blockIdField, paddingTopField, paddingBottomField } from '../_shared/fields';
 
 export const FeatureList: Block = {
   slug: 'featureList',
@@ -11,6 +11,8 @@ export const FeatureList: Block = {
     { name: 'numbered', type: 'checkbox', defaultValue: false },
     widthField,
     toneField(),
+    paddingTopField,
+    paddingBottomField,
     {
       name: 'items', type: 'array', required: true, minRows: 1,
       fields: [

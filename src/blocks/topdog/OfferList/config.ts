@@ -1,9 +1,10 @@
 import type { Block } from 'payload';
-import { widthField, toneField, ctaFields } from '../_shared/fields';
+import { blockIdField, widthField, toneField, ctaFields, paddingTopField, paddingBottomField } from '../_shared/fields';
 
 export const OfferList: Block = {
   slug: 'offerList',
   fields: [
+    blockIdField,
     { name: 'heading', type: 'text' },
     { name: 'introHtml', type: 'richText' },
     { name: 'variant', type: 'select', defaultValue: 'detailed', options: ['detailed', 'compact', 'menu'] },
@@ -11,6 +12,8 @@ export const OfferList: Block = {
     { name: 'cta', type: 'group', fields: ctaFields },
     widthField,
     toneField(),
+    paddingTopField,
+    paddingBottomField,
     {
       name: 'offers', type: 'array', required: true, minRows: 1,
       fields: [

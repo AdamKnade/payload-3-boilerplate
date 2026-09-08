@@ -1,5 +1,5 @@
 import type { Block } from 'payload';
-import { widthField, toneField } from '../_shared/fields';
+import { widthField, toneField, paddingTopField, paddingBottomField } from '../_shared/fields';
 
 // Only toggles the shared services strip — its per-service copy (descriptions,
 // schedules, images) lives in the Astro repo's src/data/services.ts, not here.
@@ -11,5 +11,7 @@ export const ServiceNavigation: Block = {
     { name: 'activeService', type: 'select', defaultValue: 'overnight', options: ['daycare', 'overnight', 'enrichment', 'spa'] },
     widthField,
     toneField('beige'),
+    paddingTopField,
+    paddingBottomField,
   ],
 };
