@@ -25,8 +25,13 @@ export const RichTextBlock: Block = {
     paddingBottomField,
     {
       name: 'floatingMedia', type: 'group',
+      label: 'Floating image (optional)',
+      admin: { description: 'Leave the image empty for no floating image.' },
       fields: [
-        { name: 'image', type: 'upload', relationTo: 'media', required: true },
+        // Not required. A group is always present in Payload, so a required
+        // field inside one cannot be opted out of -- and an empty image here
+        // used to render a broken <img> floated into the text.
+        { name: 'image', type: 'upload', relationTo: 'media' },
         { name: 'caption', type: 'text' },
         { name: 'subCaption', type: 'text' },
         { name: 'position', type: 'select', defaultValue: 'right', options: ['left', 'right'] },
