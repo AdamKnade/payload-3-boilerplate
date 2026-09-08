@@ -1,5 +1,5 @@
 import type { Block } from 'payload';
-import { widthField, toneField, paddingTopField, paddingBottomField, blockIdField, ctaFields } from '../_shared/fields';
+import { widthField, toneField, paddingTopField, paddingBottomField, blockIdField, optionalCtaFields } from '../_shared/fields';
 
 // Named `RichTextBlock` here to avoid colliding with Payload's own `richText`
 // field type import — the block's slug is still "richText".
@@ -20,7 +20,7 @@ export const RichTextBlock: Block = {
     { name: 'textWidth', type: 'select', defaultValue: '800', options: ['600', '800', '1000'] },
     widthField,
     toneField(),
-    { name: 'cta', type: 'group', fields: ctaFields },
+    { name: 'cta', type: 'group', fields: optionalCtaFields },
     paddingTopField,
     paddingBottomField,
     {

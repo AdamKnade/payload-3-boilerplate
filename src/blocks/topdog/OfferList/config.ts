@@ -1,5 +1,5 @@
 import type { Block } from 'payload';
-import { blockIdField, widthField, toneField, ctaFields, paddingTopField, paddingBottomField } from '../_shared/fields';
+import { blockIdField, widthField, toneField, paddingTopField, paddingBottomField, optionalCtaFields } from '../_shared/fields';
 
 export const OfferList: Block = {
   slug: 'offerList',
@@ -9,7 +9,7 @@ export const OfferList: Block = {
     { name: 'introHtml', type: 'richText', label: 'Intro' },
     { name: 'variant', type: 'select', defaultValue: 'detailed', options: ['detailed', 'compact', 'menu'] },
     { name: 'columns', type: 'select', defaultValue: '1', options: ['1', '2'] },
-    { name: 'cta', type: 'group', fields: ctaFields },
+    { name: 'cta', type: 'group', fields: optionalCtaFields },
     widthField,
     toneField(),
     paddingTopField,

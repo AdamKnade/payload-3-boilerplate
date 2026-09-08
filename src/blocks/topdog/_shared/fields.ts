@@ -44,6 +44,10 @@ export const paddingBottomField: Field = { name: 'paddingBottom', type: 'select'
 /** Optional HTML id for the block's <section>, for on-page anchor links (e.g. "#membership"). */
 export const blockIdField: Field = { name: 'blockId', type: 'text', label: 'Anchor ID (optional)', admin: { description: 'Sets the section’s HTML id, for links like #membership.' } };
 
+/**
+ * For a CTA inside an `array`, where a row only exists because someone added
+ * it — so a row without a label or a link is a mistake worth blocking.
+ */
 export const ctaFields: Field[] = [
   { name: 'label', type: 'text', required: true },
   { name: 'href', type: 'text', required: true },
@@ -52,3 +56,18 @@ export const ctaFields: Field[] = [
   { name: 'newTab', type: 'checkbox', label: 'Open in a new tab',
     admin: { description: 'Use for links that leave the site, e.g. the Gingr portal.' } },
 ];
+
+/**
+ * For a CTA inside a `group`. A Payload group is always present — there is no
+ * "remove" gesture for one — so a required field inside it can never be opted
+ * out of, and the block could never be saved without a CTA. Leaving the label
+ * and link empty is how you say "no button here".
+ *
+ * BlockRenderer drops any CTA missing either half, so an abandoned one cannot
+ * reach the page as an empty <a>.
+ */
+export const optionalCtaFields: Field[] = ctaFields.map((field) =>
+  'name' in field && (field.name === 'label' || field.name === 'href')
+    ? { ...field, required: false }
+    : field,
+);

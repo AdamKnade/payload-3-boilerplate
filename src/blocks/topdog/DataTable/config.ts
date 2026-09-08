@@ -1,5 +1,5 @@
 import type { Block } from 'payload';
-import { blockIdField, widthField, toneField, ctaFields, paddingTopField, paddingBottomField } from '../_shared/fields';
+import { blockIdField, widthField, toneField, paddingTopField, paddingBottomField, optionalCtaFields } from '../_shared/fields';
 
 export const DataTable: Block = {
   slug: 'dataTable',
@@ -11,7 +11,7 @@ export const DataTable: Block = {
     { name: 'align', type: 'select', defaultValue: 'left', options: ['left', 'center'] },
     { name: 'highlightedRow', type: 'number', admin: { description: 'Zero-based row index to visually highlight (optional).' } },
     { name: 'footnotesHtml', type: 'richText', label: 'Footnotes' },
-    { name: 'cta', type: 'group', fields: ctaFields },
+    { name: 'cta', type: 'group', fields: optionalCtaFields },
     widthField,
     toneField(),
     paddingTopField,

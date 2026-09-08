@@ -1,5 +1,5 @@
 import type { Block } from 'payload';
-import { widthField, toneField, blockIdField, ctaFields, paddingTopField, paddingBottomField } from '../_shared/fields';
+import { widthField, toneField, blockIdField, ctaFields, paddingTopField, paddingBottomField, optionalCtaFields } from '../_shared/fields';
 
 export const Columns: Block = {
   slug: 'columns',
@@ -50,7 +50,7 @@ export const Columns: Block = {
               fields: [{ name: 'cells', type: 'array', fields: [{ name: 'value', type: 'text', required: true }] }],
             },
             { name: 'footnoteHtml', type: 'richText', label: 'Footnote' },
-            { name: 'cta', type: 'group', fields: ctaFields },
+            { name: 'cta', type: 'group', fields: optionalCtaFields },
           ],
         },
         { name: 'ctas', type: 'array', fields: ctaFields },

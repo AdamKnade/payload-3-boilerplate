@@ -1,5 +1,5 @@
 import type { Block } from 'payload';
-import { blockIdField, widthField, toneField, ctaFields, paddingTopField, paddingBottomField } from '../_shared/fields';
+import { blockIdField, widthField, toneField, paddingTopField, paddingBottomField, optionalCtaFields } from '../_shared/fields';
 
 export const Cards: Block = {
   slug: 'cards',
@@ -28,7 +28,7 @@ export const Cards: Block = {
         { name: 'subtitle', type: 'text' },
         { name: 'value', type: 'text' },
         { name: 'bodyHtml', type: 'richText', label: 'Body' },
-        { name: 'cta', type: 'group', fields: ctaFields },
+        { name: 'cta', type: 'group', fields: optionalCtaFields },
       ],
     },
   ],

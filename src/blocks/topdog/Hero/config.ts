@@ -8,8 +8,9 @@ export const Hero: Block = {
   fields: [
     { name: 'image', type: 'upload', relationTo: 'media', required: true },
     { name: 'heading', type: 'textarea', required: true, admin: { description: 'Line breaks in this field become <br /> line breaks in the heading.' } },
-    { name: 'ctaLabel', type: 'text', required: true },
-    { name: 'ctaHref', type: 'text', required: true },
+    // Optional: a hero can be an image and a heading with no button.
+    { name: 'ctaLabel', type: 'text' },
+    { name: 'ctaHref', type: 'text' },
     { name: 'ctaNewTab', type: 'checkbox', label: 'Open in a new tab' },
     widthField,
     toneField('dark'),
