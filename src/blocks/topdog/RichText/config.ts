@@ -15,7 +15,13 @@ export const RichTextBlock: Block = {
     // because the markup it replaced carried a class (.schedule-lines) and
     // Lexical cannot hold one -- see MIGRATION.md.
     { name: 'bodyVariant', type: 'select', defaultValue: '',
-      options: [{ label: 'Prose', value: '' }, { label: 'Schedule list', value: 'schedule' }] },
+      options: [
+        { label: 'Prose', value: '' },
+        { label: 'Schedule list', value: 'schedule' },
+        // Drops the body one size, to .type-body-small, for standing notes
+        // sitting under the block they qualify.
+        { label: 'Fine print', value: 'fine-print' },
+      ] },
     { name: 'align', type: 'select', defaultValue: 'left', options: ['left', 'center'] },
     { name: 'textWidth', type: 'select', defaultValue: '800', options: ['600', '800', '1000'] },
     widthField,

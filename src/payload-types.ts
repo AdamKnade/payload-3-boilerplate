@@ -191,8 +191,8 @@ export interface Page {
          * Line breaks in this field become <br /> line breaks in the heading.
          */
         heading: string;
-        ctaLabel: string;
-        ctaHref: string;
+        ctaLabel?: string | null;
+        ctaHref?: string | null;
         ctaNewTab?: boolean | null;
         width?: ('full' | '1000' | '1200' | '1400') | null;
         tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
@@ -251,14 +251,13 @@ export interface Page {
             };
             [k: string]: unknown;
           } | null;
-          cta: {
-            label: string;
-            href: string;
+          cta?: {
+            label?: string | null;
+            href?: string | null;
             /**
              * Use for links that leave the site, e.g. the Gingr portal.
              */
             newTab?: boolean | null;
-            id?: string | null;
           };
           id?: string | null;
         }[];
@@ -384,6 +383,7 @@ export interface Page {
         tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
         paddingTop?: ('none' | 'compact' | 'standard' | 'roomy') | null;
         paddingBottom?: ('none' | 'compact' | 'standard' | 'roomy') | null;
+        padding?: ('none' | 'small' | 'medium' | 'large') | null;
         columns: {
           heading?: string | null;
           /**
@@ -426,7 +426,7 @@ export interface Page {
           /**
            * Leave the rows empty if this column has no table.
            */
-          table: {
+          table?: {
             headers?:
               | {
                   value: string;
@@ -459,14 +459,13 @@ export interface Page {
               };
               [k: string]: unknown;
             } | null;
-            cta: {
-              label: string;
-              href: string;
+            cta?: {
+              label?: string | null;
+              href?: string | null;
               /**
                * Use for links that leave the site, e.g. the Gingr portal.
                */
               newTab?: boolean | null;
-              id?: string | null;
             };
           };
           ctas?:
@@ -509,23 +508,26 @@ export interface Page {
           };
           [k: string]: unknown;
         };
+        bodyVariant?: ('' | 'schedule' | 'fine-print') | null;
         align?: ('left' | 'center') | null;
         textWidth?: ('600' | '800' | '1000') | null;
         width?: ('full' | '1000' | '1200' | '1400') | null;
         tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
-        cta: {
-          label: string;
-          href: string;
+        cta?: {
+          label?: string | null;
+          href?: string | null;
           /**
            * Use for links that leave the site, e.g. the Gingr portal.
            */
           newTab?: boolean | null;
-          id?: string | null;
         };
         paddingTop?: ('none' | 'compact' | 'standard' | 'roomy') | null;
         paddingBottom?: ('none' | 'compact' | 'standard' | 'roomy') | null;
-        floatingMedia: {
-          image: number | Media;
+        /**
+         * Leave the image empty for no floating image.
+         */
+        floatingMedia?: {
+          image?: (number | null) | Media;
           caption?: string | null;
           subCaption?: string | null;
           position?: ('left' | 'right') | null;
@@ -576,14 +578,13 @@ export interface Page {
           };
           [k: string]: unknown;
         } | null;
-        cta: {
-          label: string;
-          href: string;
+        cta?: {
+          label?: string | null;
+          href?: string | null;
           /**
            * Use for links that leave the site, e.g. the Gingr portal.
            */
           newTab?: boolean | null;
-          id?: string | null;
         };
         width?: ('full' | '1000' | '1200' | '1400') | null;
         tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
@@ -702,6 +703,8 @@ export interface Page {
           [k: string]: unknown;
         } | null;
         columns?: ('1' | '2') | null;
+        align?: ('left' | 'center') | null;
+        labelStyle?: ('heading' | 'meta') | null;
         numbered?: boolean | null;
         width?: ('full' | '1000' | '1200' | '1400') | null;
         tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
@@ -812,14 +815,13 @@ export interface Page {
         } | null;
         variant?: ('detailed' | 'compact' | 'menu') | null;
         columns?: ('1' | '2') | null;
-        cta: {
-          label: string;
-          href: string;
+        cta?: {
+          label?: string | null;
+          href?: string | null;
           /**
            * Use for links that leave the site, e.g. the Gingr portal.
            */
           newTab?: boolean | null;
-          id?: string | null;
         };
         width?: ('full' | '1000' | '1200' | '1400') | null;
         tone?: ('white' | 'beige' | 'sage' | 'green' | 'dark') | null;
@@ -899,6 +901,10 @@ export interface Page {
     description?: string | null;
   };
   publishedAt?: string | null;
+  /**
+   * Optional class applied to <body>. Only needed for pages whose design depends on it -- currently "about-page". Leave empty otherwise.
+   */
+  bodyClass?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1694,7 +1700,6 @@ export interface PagesSelect<T extends boolean = true> {
                           label?: T;
                           href?: T;
                           newTab?: T;
-                          id?: T;
                         };
                     id?: T;
                   };
@@ -1760,6 +1765,7 @@ export interface PagesSelect<T extends boolean = true> {
               tone?: T;
               paddingTop?: T;
               paddingBottom?: T;
+              padding?: T;
               columns?:
                 | T
                 | {
@@ -1794,7 +1800,6 @@ export interface PagesSelect<T extends boolean = true> {
                                 label?: T;
                                 href?: T;
                                 newTab?: T;
-                                id?: T;
                               };
                         };
                     ctas?:
@@ -1818,6 +1823,7 @@ export interface PagesSelect<T extends boolean = true> {
               eyebrow?: T;
               heading?: T;
               bodyHtml?: T;
+              bodyVariant?: T;
               align?: T;
               textWidth?: T;
               width?: T;
@@ -1828,7 +1834,6 @@ export interface PagesSelect<T extends boolean = true> {
                     label?: T;
                     href?: T;
                     newTab?: T;
-                    id?: T;
                   };
               paddingTop?: T;
               paddingBottom?: T;
@@ -1859,7 +1864,6 @@ export interface PagesSelect<T extends boolean = true> {
                     label?: T;
                     href?: T;
                     newTab?: T;
-                    id?: T;
                   };
               width?: T;
               tone?: T;
@@ -1912,6 +1916,8 @@ export interface PagesSelect<T extends boolean = true> {
               heading?: T;
               introHtml?: T;
               columns?: T;
+              align?: T;
+              labelStyle?: T;
               numbered?: T;
               width?: T;
               tone?: T;
@@ -1979,7 +1985,6 @@ export interface PagesSelect<T extends boolean = true> {
                     label?: T;
                     href?: T;
                     newTab?: T;
-                    id?: T;
                   };
               width?: T;
               tone?: T;
@@ -2038,6 +2043,7 @@ export interface PagesSelect<T extends boolean = true> {
         description?: T;
       };
   publishedAt?: T;
+  bodyClass?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;

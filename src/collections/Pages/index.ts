@@ -137,6 +137,16 @@ export const Pages: CollectionConfig<'pages'> = {
         position: 'sidebar',
       },
     },
+    {
+      name: 'bodyClass',
+      type: 'text',
+      admin: {
+        position: 'sidebar',
+        description:
+          'Optional class applied to <body>. Only needed for pages whose design ' +
+          'depends on it -- currently "about-page". Leave empty otherwise.',
+      },
+    },
     ...slugField(),
   ],
   hooks: {

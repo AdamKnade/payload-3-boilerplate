@@ -8,6 +8,10 @@ export const FeatureList: Block = {
     { name: 'heading', type: 'text' },
     { name: 'introHtml', type: 'richText', label: 'Intro' },
     { name: 'columns', type: 'select', defaultValue: '2', options: ['1', '2'] },
+    { name: 'align', type: 'select', defaultValue: 'left', options: ['left', 'center'] },
+    // 'meta' renders each label small, bold and letterspaced instead of as a
+    // display-font subheading -- for term/definition content rather than features.
+    { name: 'labelStyle', type: 'select', defaultValue: 'heading', options: ['heading', 'meta'] },
     { name: 'numbered', type: 'checkbox', defaultValue: false },
     widthField,
     toneField(),
